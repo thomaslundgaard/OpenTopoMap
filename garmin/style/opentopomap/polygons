@@ -8,13 +8,13 @@
 # and http://wiki.openstreetmap.org/wiki/Mkgmap/help/Custom_styles
 # for more information.
 
-leisure=* & sport=* & name=* { set name='${name} (${sport})' }
-leisure=* & sport=* & name!=* { add name='${sport}' }
+# leisure=* & sport=* & name=* { set name='${name} (${sport})' }
+# leisure=* & sport=* & name!=* { add name='${sport}' }
 
-include 'inc/name';
+# include 'inc/name';
 
 # buildings tag should be FIRST
-building=* & area!=no [0x13 resolution 24 continue]
+# building=* & area!=no [0x13 resolution 24 continue]
 
 aeroway=airport [0x07 resolution 20]
 aeroway=aerodrome [0x07 resolution 20]
@@ -32,10 +32,10 @@ amenity=school [0x0a resolution 24]
 amenity=supermarket [0x08 resolution 22]
 amenity=university [0x0a resolution 24 continue]
 
-(healthcare=hospital | amenity=hospital) & (building!=*) [0x0b resolution 24]
-(healthcare=hospital | amenity=hospital) & (building=*) [0x0b resolution 24 continue]
-healthcare=* | amenity=dentist | amenity=doctors | amenity=nursing_home
-[0x0b resolution 24]
+# (healthcare=hospital | amenity=hospital) & (building!=*) [0x0b resolution 24]
+# (healthcare=hospital | amenity=hospital) & (building=*) [0x0b resolution 24 continue]
+# healthcare=* | amenity=dentist | amenity=doctors | amenity=nursing_home
+# [0x0b resolution 24]
 
 #leisure=common [0x17 resolution 21]
 leisure=garden [0x17 resolution 21]
@@ -92,4 +92,4 @@ include 'inc/landuse_polygons';
 <finalize>
 # The finalizer section is executed for each element when a rule with an element type matches
 
-name=* { name '${name}' }
+# name=* { name '${name}' }

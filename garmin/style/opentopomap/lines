@@ -12,7 +12,7 @@ aeroway=runway [0x27 resolution 20]
 aeroway=taxiway [0x27 resolution 24]
 
 # Assign the street name for house number search
-highway=* & name=* { set mkgmap:street='${name}' }
+# highway=* & name=* { set mkgmap:street='${name}' }
 
 # Mark highways with the toll flag
 highway=* & (toll=yes|toll=true) { set mkgmap:toll=yes }
@@ -30,37 +30,37 @@ highway=* & oneway=yes & (access=private|access=no)
 highway=motorway|highway=motorway_link { add oneway=yes }
 
 # Set highway names to include the reference if there is one
-highway=motorway { name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}' }
+# highway=motorway { name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}' }
 
-(highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint=true & mkgmap:dest_hint=true
-  { name '${destination:ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
-         '${ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
-         '${destination|subst:;=> |subst:/=> }' |
-         'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_name}' | 
-         'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_exit_to}' | 
-         'Exit ${mkgmap:exit_hint_exit_to}' |
-         'Exit ${mkgmap:exit_hint_name}' |
-         'Exit ${mkgmap:exit_hint_ref}'
-       }
+# (highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint=true & mkgmap:dest_hint=true
+#   { name '${destination:ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
+#          '${ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
+#          '${destination|subst:;=> |subst:/=> }' |
+#          'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_name}' | 
+#          'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_exit_to}' | 
+#          'Exit ${mkgmap:exit_hint_exit_to}' |
+#          'Exit ${mkgmap:exit_hint_name}' |
+#          'Exit ${mkgmap:exit_hint_ref}'
+#        }
 
-(highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint!=* & mkgmap:dest_hint=true
-  { name '${destination:ref|subst: =>} ${destination|subst:;=> |subst:/=> }' |
-         '${ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
-         '${destination|subst:;=> |subst:/=> }'
-       }
+# (highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint!=* & mkgmap:dest_hint=true
+#   { name '${destination:ref|subst: =>} ${destination|subst:;=> |subst:/=> }' |
+#          '${ref|subst: =>} ${destination|subst:;=> |subst:/=> }' | 
+#          '${destination|subst:;=> |subst:/=> }'
+#        }
 
-(highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint=true & mkgmap:dest_hint!=*
-  { name 'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_name}' | 
-         'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_exit_to}' | 
-         'Exit ${mkgmap:exit_hint_exit_to}' |
-         'Exit ${mkgmap:exit_hint_name}' |
-         'Exit ${mkgmap:exit_hint_ref}'
-       }
+# (highway=motorway_link | highway=trunk_link) & mkgmap:exit_hint=true & mkgmap:dest_hint!=*
+#   { name 'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_name}' | 
+#          'Exit ${mkgmap:exit_hint_ref} ${mkgmap:exit_hint_exit_to}' | 
+#          'Exit ${mkgmap:exit_hint_exit_to}' |
+#          'Exit ${mkgmap:exit_hint_name}' |
+#          'Exit ${mkgmap:exit_hint_ref}'
+#        }
               
-highway=trunk {name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}'; addlabel '${name} (${ref})' }
-highway=primary {name '${ref|highway-symbol:box} ${name}' | '${ref|highway-symbol:box}' | '${name}'; addlabel '${name} (${ref})' }
-highway=secondary | highway=tertiary {name '${ref|highway-symbol:oval} ${name}' | '${ref|highway-symbol:oval}' | '${name}'; addlabel '${name} (${ref})' }
-highway=* {name '${name}' | '${ref}' }
+# highway=trunk {name '${ref|highway-symbol:hbox} ${name}' | '${ref|highway-symbol:hbox}' | '${name}'; addlabel '${name} (${ref})' }
+# highway=primary {name '${ref|highway-symbol:box} ${name}' | '${ref|highway-symbol:box}' | '${name}'; addlabel '${name} (${ref})' }
+# highway=secondary | highway=tertiary {name '${ref|highway-symbol:oval} ${name}' | '${ref|highway-symbol:oval}' | '${name}'; addlabel '${name} (${ref})' }
+# highway=* {name '${name}' | '${ref}' }
 
 # Flag unpaved roads.
 highway=*
@@ -90,10 +90,10 @@ highway=path & (horse=designated|horse=permissive|horse=official)
 highway=path
 {set highway=footway}
 
-leisure=track & area!=yes
-{add highway=footway; name '${name} (${sport})' | '${name}'}
-(man_made=pier | man_made=piste:halfpipe) & area!=yes
-{add highway=footway; name '${ref} ${name}' | '${ref}' | '${name}' }
+# leisure=track & area!=yes
+# {add highway=footway; name '${name} (${sport})' | '${name}'}
+# (man_made=pier | man_made=piste:halfpipe) & area!=yes
+# {add highway=footway; name '${ref} ${name}' | '${ref}' | '${name}' }
 
 # Roundabouts
 junction=roundabout & (highway=trunk | highway=trunk_link) [0x0c road_class=3 road_speed=2 resolution 18]
@@ -156,35 +156,35 @@ highway=residential | (highway=pedestrian & area!=yes) | highway=living_street [
 highway=pedestrian & area!=yes [0x0d road_class=0 road_speed=0 resolution 22]
 highway=living_street [0x06 road_class=0 road_speed=1 resolution 22]
 highway=residential [0x06 road_class=0 road_speed=2 resolution 22]
-highway=bridleway [0x07 road_class=0 road_speed=0 resolution 23]
-highway=byway [0x16 road_class=0 road_speed=0 resolution 23]
+highway=bridleway [0x07 road_class=0 road_speed=0 resolution 22]
+highway=byway [0x16 road_class=0 road_speed=0 resolution 22]
 
 highway=service & service=parking_aisle
-[0x07 road_class=0 road_speed=1 resolution 24]
+[0x07 road_class=0 road_speed=1 resolution 23]
 highway=service & (service=alley|service=driveway)
-[0x07 road_class=0 road_speed=0 resolution 23]
-highway=service [0x0a resolution 22-22 continue]
-highway=service [0x07 road_class=0 road_speed=2 resolution 23]
+[0x07 road_class=0 road_speed=0 resolution 22]
+highway=service [0x0a resolution 21-21 continue]
+highway=service [0x07 road_class=0 road_speed=2 resolution 22]
 
-highway=cycleway [0x0a resolution 22-22 continue]
-highway=cycleway [0x07 road_class=0 road_speed=1 resolution 23]
+highway=cycleway [0x0a resolution 21-21 continue]
+highway=cycleway [0x07 road_class=0 road_speed=1 resolution 22]
 
-(highway=footway|highway=path) & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 22]
-highway=footway|highway=path [0x16 road_class=0 road_speed=0 resolution 23]
-highway=steps [0x13 road_class=0 road_speed=0 resolution 23]
+(highway=footway|highway=path) & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 20]
+highway=footway|highway=path [0x16 road_class=0 road_speed=0 resolution 21]
+highway=steps [0x13 road_class=0 road_speed=0 resolution 21]
 
-highway=track & tracktype=grade1 [0x0a resolution 21-21 continue]
-highway=track & tracktype=grade1 [0x07 road_class=0 road_speed=1 resolution 22]
-highway=track [0x0a road_class=0 road_speed=1 resolution 22]
-highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 22]
-highway=road { add mkgmap:dead-end-check = false} [0x06 road_class=0 road_speed=1 resolution 22]
+highway=track & tracktype=grade1 [0x0a resolution 20-20 continue]
+highway=track & tracktype=grade1 [0x07 road_class=0 road_speed=1 resolution 21]
+highway=track [0x0a road_class=0 road_speed=1 resolution 21]
+highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 21]
+highway=road { add mkgmap:dead-end-check = false} [0x06 road_class=0 road_speed=1 resolution 21]
 
 # Mop up any unrecognised highway types
-highway=* & highway!=proposed & area!=yes [0x07 road_class=0 road_speed=0 resolution 23] 
+highway=* & highway!=proposed & area!=yes [0x07 road_class=0 road_speed=0 resolution 21] 
 
 natural=coastline [0x15 resolution 12]
-power=line {delete name} [0x29 resolution 21]
-power=minor_line {delete name} [0x29 resolution 24]
+# power=line {delete name} [0x29 resolution 21]
+# power=minor_line {delete name} [0x29 resolution 24]
 
 #railway=abandoned [0x0a road_class=0 road_speed=1 resolution 22]
 railway=platform [0x16 road_class=0 road_speed=0 resolution 23]
@@ -193,14 +193,14 @@ railway=platform [0x16 road_class=0 road_speed=0 resolution 23]
 (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel=yes [0x2c resolution 24]
 (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) [0x14 resolution 24]
 
-(man_made=cable|(man_made=* & man_made ~ '.*pipe.*')) & area!=yes &
-tunnel!=yes & location != underground
-{name '${name} (${operator})' | '${name}' | '${operator}' }
-[0x28 resolution 23]
+# (man_made=cable|(man_made=* & man_made ~ '.*pipe.*')) & area!=yes &
+# tunnel!=yes & location != underground
+# {name '${name} (${operator})' | '${name}' | '${operator}' }
+# [0x28 resolution 23]
 
 # The following boundary styles are after the highway rules because ways
 # are frequently tagged with both and we want the highway to take priority.
-boundary=administrative { name '${mkgmap:boundary_name}' }
+# boundary=administrative { name '${mkgmap:boundary_name}' }
 boundary=administrative & admin_level<3 [0x1e resolution 12]
 boundary=administrative & admin_level<5 [0x1d resolution 19]
 boundary=administrative & admin_level<7 [0x1c resolution 21]
@@ -219,15 +219,15 @@ include 'inc/contour_lines';
 <finalize>
 # The finalizer section is executed for each element when a rule with an element type matches
 
-include 'inc/address';
+# include 'inc/address';
 # calculate the road speed based on maxspeed tag
 include 'inc/roadspeed'; 
 # calculate the access rules
 include 'inc/access';
 
-name=* { name '${name}' }
+# name=* { name '${name}' }
 
-highway=* & ref=* { addlabel '${ref}' }
-highway=* & int_ref=* { addlabel '${int_ref}' }
-highway=* & nat_ref=* { addlabel '${nat_ref}' }
-highway=* & reg_ref=* { addlabel '${reg_ref}' }
+# highway=* & ref=* { addlabel '${ref}' }
+# highway=* & int_ref=* { addlabel '${int_ref}' }
+# highway=* & nat_ref=* { addlabel '${nat_ref}' }
+# highway=* & reg_ref=* { addlabel '${reg_ref}' }

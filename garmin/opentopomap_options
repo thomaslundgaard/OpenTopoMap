@@ -36,8 +36,8 @@ route
 make-opposite-cycleways
 add-pois-to-areas
 add-pois-to-lines
-check-roundabouts
-check-roundabout-flares
+# check-roundabouts
+# check-roundabout-flares
 link-pois-to-ways
 process-destination
 process-exits

@@ -2095,7 +2095,7 @@ Xpm="0 0 2 0"
 Type=0x0a
 ExtendedLabels=Y
 FontStyle=SmallFont
-LineWidth=1
+LineWidth=2
 Xpm="0 0 1 0"
 "a c #000000"
 [end]
@@ -2168,10 +2168,11 @@ String=0x02,Fußweg
 String=0x04,footway
 ExtendedLabels=Y
 FontStyle=SmallFont
-Xpm="32 1 2 1"
+Xpm="32 2 2 1"
 "  c none"
 "# c #000000"
-"####    ####    ####    ####    "
+"######  ######  ######  ######  "
+"######  ######  ######  ######  "
 [end]
 
 [_line]
