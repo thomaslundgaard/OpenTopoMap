@@ -9,7 +9,7 @@
 # for more information.
 
 aeroway=runway [0x27 resolution 20]
-aeroway=taxiway [0x27 resolution 24]
+aeroway=taxiway [0x27 resolution 23]
 
 # Assign the street name for house number search
 # highway=* & name=* { set mkgmap:street='${name}' }
@@ -169,8 +169,8 @@ highway=service [0x07 road_class=0 road_speed=2 resolution 22]
 highway=cycleway [0x0a resolution 21-21 continue]
 highway=cycleway [0x07 road_class=0 road_speed=1 resolution 22]
 
-(highway=footway|highway=path) & footway!=sidewalk & footway!=crossing & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 20]
-(highway=footway|highway=path) & footway!=sidewalk & footway!=crossing [0x16 road_class=0 road_speed=0 resolution 21]
+(highway=footway|highway=path) & footway!=* & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 20]
+(highway=footway|highway=path) & footway!=* [0x16 road_class=0 road_speed=0 resolution 21]
 highway=steps [0x13 road_class=0 road_speed=0 resolution 21]
 
 highway=track & tracktype=grade1 [0x0a resolution 20-20 continue]
@@ -180,7 +180,7 @@ highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 21]
 highway=road { add mkgmap:dead-end-check = false} [0x06 road_class=0 road_speed=1 resolution 21]
 
 # Mop up any unrecognised highway types
-highway=* & highway!=proposed & area!=yes & footway!=sidewalk & footway!=crossing [0x07 road_class=0 road_speed=0 resolution 21] 
+highway=* & highway!=proposed & area!=yes & footway!=* [0x07 road_class=0 road_speed=0 resolution 21] 
 
 natural=coastline [0x15 resolution 12]
 # power=line {delete name} [0x29 resolution 21]
@@ -201,17 +201,17 @@ natural=coastline [0x15 resolution 12]
 # The following boundary styles are after the highway rules because ways
 # are frequently tagged with both and we want the highway to take priority.
 # boundary=administrative { name '${mkgmap:boundary_name}' }
-boundary=administrative & admin_level<3 [0x1e resolution 12]
-boundary=administrative & admin_level<5 [0x1d resolution 19]
-boundary=administrative & admin_level<7 [0x1c resolution 21]
-boundary=administrative & admin_level<9 [0x1c resolution 22]
-boundary=administrative [0x1c resolution 22]
-boundary=national [0x1e resolution 17]
-boundary=political [0x1c resolution 19]
+# boundary=administrative & admin_level<3 [0x1e resolution 12]
+# boundary=administrative & admin_level<5 [0x1d resolution 19]
+# boundary=administrative & admin_level<7 [0x1c resolution 21]
+# boundary=administrative & admin_level<9 [0x1c resolution 22]
+# boundary=administrative [0x1c resolution 22]
+# boundary=national [0x1e resolution 17]
+# boundary=political [0x1c resolution 19]
 
-natural=cliff [0x31 resolution 24]
-barrier=fence | fenced=yes [0x33 resolution 24]
-natural=wood | landuse=forest [0x11002  resolution 24 continue] 
+# natural=cliff [0x31 resolution 23]
+# barrier=fence | fenced=yes [0x33 resolution 24]
+# natural=wood | landuse=forest [0x11002  resolution 24 continue] 
 
 include 'inc/water_lines';
 include 'inc/contour_lines';

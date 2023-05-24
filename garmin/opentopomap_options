@@ -2,7 +2,7 @@
 product-id: 1
 product-version: 100
 draw-priority: 20
-copyright-message=OpenTopoMap
+# copyright-message=OpenTopoMap
 # family-name="familyname"
 # series-name="seriesname"
 # area-name="areaname"
@@ -26,10 +26,10 @@ drive-on=detect,right
 # bounds=bounds-latest.zip
 # precomp-sea=sea-latest.zip
 # dem=viewfinderpanoramas.zip
-dem-dists=9942,9942,19884,39768,53024,53024
+# dem-dists=9942,9942,19884,39768,53024,53024
 show-profiles=1
-reduce-point-density=4
-reduce-point-density-polygon=4
+reduce-point-density=1.4
+reduce-point-density-polygon=2
 min-size-polygon=8
 polygon-size-limits=24:12, 18:10, 16:8, 14:4, 13:2, 11:0
 route

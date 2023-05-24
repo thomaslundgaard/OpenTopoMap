@@ -8,6 +8,10 @@
 #    GeoJSON editor at geojson.io
 # 5. Run this script
 #
+# To view final map, use QMapShack through Linux.
+# To mount UTM shared folder in Ubuntu:
+# mkdir garmin; sudo mount -t 9p -o trans=virtio share garmin -oversion=9p2000.L
+#
 # Tag viewer: https://www.openstreetmap.org/#map=12/30.5354/102.7140&layers=D
 #
 # Changes from upstream:
@@ -33,43 +37,45 @@
 # eu-mountains					alps
 # ----------------------------------------------------------------
 
+set -e # exit when any command fails
+
 INDEX=$1 # may not be larger than 9
 
 if [[ $INDEX -eq 1 ]]; then
 	MAPFILE="data/na-east.osm.pbf"
-	if [ ! -f "$MAPFILE" ]; then
-		osmium extract -p areas/na-east.geojson data/north-america-latest.osm.pbf -o "$MAPFILE"
-	fi
+	MAPDESCRIPTION="otm-tlh-na-east"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-na-east-tlh"
+	if [ ! -f "$MAPFILE" ]; then
+		osmium extract --set-bounds -p areas/na-east.geojson data/north-america-latest.osm.pbf -o "$MAPFILE"
+	fi
 elif [[ $INDEX -eq 2 ]]; then
 	MAPFILE="data/na-west.osm.pbf"
-	if [ ! -f "$MAPFILE" ]; then
-		osmium extract -p areas/na-west.geojson data/north-america-latest.osm.pbf -o "$MAPFILE"
-	fi
+	MAPDESCRIPTION="otm-tlh-na-west"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-na-west-tlh"
+	if [ ! -f "$MAPFILE" ]; then
+		osmium extract --set-bounds -p areas/na-west.geojson data/north-america-latest.osm.pbf -o "$MAPFILE"
+	fi
 elif [[ $INDEX -eq 3 ]]; then
 	MAPFILE="data/denmark-latest.osm.pbf"
+	MAPDESCRIPTION="otm-tlh-denmark"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-denmark-tlh"
 elif [[ $INDEX -eq 4 ]]; then
 	MAPFILE="data/eu-mountains.osm.pbf"
-	if [ ! -f "$MAPFILE" ]; then
-		osmium extract -p areas/eu-mountains.geojson data/europe-latest.osm.pbf -o "$MAPFILE"
-	fi
+	MAPDESCRIPTION="otm-tlh-eu-mountains"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-eu-mountains-tlh"
+	if [ ! -f "$MAPFILE" ]; then
+		osmium extract --set-bounds -p areas/eu-mountains.geojson data/europe-latest.osm.pbf -o "$MAPFILE"
+	fi
 
 # Temporary maps
 elif [[ $INDEX -eq 8 ]]; then
 	MAPFILE="data/us-northeast.osm.pbf"
+	MAPDESCRIPTION="otm-tlh-us-northeast"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-us-northeast-tlh"
 elif [[ $INDEX -eq 9 ]]; then
 	MAPFILE="data/greenland.osm.pbf"
+	MAPDESCRIPTION="otm-tlh-greenland"
 	MAPNAME="744${INDEX}0001" # beginning must be unique for each map on device
-	MAPDESCRIPTION="otm-greenland-tlh"
 else
 	echo "Invalid INDEX"
 	exit
@@ -96,11 +102,11 @@ java -Xmx10g -jar $MKGMAPJAR \
 	-c $OPTIONS --style-file=$STYLEFILE \
     --precomp-sea=$SEA --bounds=$BOUNDS \
 	--description="$MAPDESCRIPTION" --mapname="$MAPNAME" \
-	--family-name="" --series-name="" \
 	--max-jobs=5 \
     --output-dir=$OUTPUTDIR $TYPFILE $DATA
 
 echo "Moving result to $OUTPUTFILE"
-rm "$OUTPUTFILE"
+set +e
+rm "$OUTPUTFILE" 2>/dev/null
 mv "$OUTPUTDIR/gmapsupp.img" "$OUTPUTFILE"
 
