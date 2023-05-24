@@ -169,8 +169,8 @@ highway=service [0x07 road_class=0 road_speed=2 resolution 22]
 highway=cycleway [0x0a resolution 21-21 continue]
 highway=cycleway [0x07 road_class=0 road_speed=1 resolution 22]
 
-(highway=footway|highway=path) & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 20]
-highway=footway|highway=path [0x16 road_class=0 road_speed=0 resolution 21]
+(highway=footway|highway=path) & footway!=sidewalk & footway!=crossing & tracktype~'grade[1-2]' {add access = no; add foot = yes} [0x16 road_class=0 road_speed=0 resolution 20]
+(highway=footway|highway=path) & footway!=sidewalk & footway!=crossing [0x16 road_class=0 road_speed=0 resolution 21]
 highway=steps [0x13 road_class=0 road_speed=0 resolution 21]
 
 highway=track & tracktype=grade1 [0x0a resolution 20-20 continue]
@@ -180,18 +180,18 @@ highway=unsurfaced [0x0a road_class=0 road_speed=1 resolution 21]
 highway=road { add mkgmap:dead-end-check = false} [0x06 road_class=0 road_speed=1 resolution 21]
 
 # Mop up any unrecognised highway types
-highway=* & highway!=proposed & area!=yes [0x07 road_class=0 road_speed=0 resolution 21] 
+highway=* & highway!=proposed & area!=yes & footway!=sidewalk & footway!=crossing [0x07 road_class=0 road_speed=0 resolution 21] 
 
 natural=coastline [0x15 resolution 12]
 # power=line {delete name} [0x29 resolution 21]
 # power=minor_line {delete name} [0x29 resolution 24]
 
 #railway=abandoned [0x0a road_class=0 road_speed=1 resolution 22]
-railway=platform [0x16 road_class=0 road_speed=0 resolution 23]
-(railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel!=yes [0x2d resolution 19-23 continue]
-(railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel=yes [0x2e resolution 19-23 continue]
-(railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel=yes [0x2c resolution 24]
-(railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) [0x14 resolution 24]
+# railway=platform [0x16 road_class=0 road_speed=0 resolution 23]
+# (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel!=yes [0x2d resolution 19-23 continue]
+# (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel=yes [0x2e resolution 19-23 continue]
+# (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) & tunnel=yes [0x2c resolution 24]
+# (railway=rail | railway=disused | railway=light_rail | railway=monorail | railway=narrow_gauge | railway=subway) [0x14 resolution 24]
 
 # (man_made=cable|(man_made=* & man_made ~ '.*pipe.*')) & area!=yes &
 # tunnel!=yes & location != underground
