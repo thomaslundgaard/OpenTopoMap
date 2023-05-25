@@ -14,11 +14,11 @@
 #
 # Tag viewer: https://www.openstreetmap.org/#map=12/30.5354/102.7140&layers=D
 #
-# Changes from upstream:
+# Major changes from upstream:
 #    - Remove labels
 #    - Remove buildings
 #    - Trail: double width, shorter breaks, visible at 2-3 higher zoom levels
-#    - remove everything but public toilet icons
+#    - remove all icons except toilets, fuel & huts
 #    - icons at higher level
 #    - no railroads
 #    - no sidewalks
